@@ -4,17 +4,16 @@ require 'pry'
 def apply_coupons(cart, coupons)
   cart.each do |element|
     coupons.each  do |c_element|
-      if c_element[:item] == element[:item]
-        if element[:count] >= c_element[:num]
+      if c_element[:item] == element[:item] && element[:count] >= c_element[:num]
+      #  if element[:count] >= c_element[:num]
           element[:count] -= c_element[:num]
-        else
-          element[:count] == 0
-        end
-        cart << {:item => "#{c_element[:item]} W/COUPON", :count => c_element[:num], :price => (c_element[:cost])/(c_element[:num]), :clearance => element[:clearance]}
+      else
+        element[:count] == 0
       end
+      cart << {:item => "#{c_element[:item]} W/COUPON", :count => c_element[:num], :price => (c_element[:cost])/(c_element[:num]), :clearance => element[:clearance]}
     end
   end
-  cart 
+  cart
 end
 
 def apply_clearance(cart)
